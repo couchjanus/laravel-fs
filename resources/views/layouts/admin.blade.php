@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Laravel 5.5 CRUD</title>
+    <title>Admin Layout</title>
 
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
@@ -20,15 +20,15 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="{{ route('index') }}">Laravel 5.5 CRUD</a>
+        <a class="navbar-brand" href="{{ route('posts.index') }}">Admin Panel</a>
 
         <div class="collapse navbar-collapse" id="navbarsDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('index') }}">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ route('posts.index') }}">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('create') }}">Add article </a>
+                    <a class="nav-link" href="{{ route('posts.create') }}">Add article </a>
                 </li>
 
             </ul>
@@ -42,7 +42,7 @@
         <hr>
 
         <footer>
-            Laravel 5.5 CRUD
+            Janus Nic Laravel
         </footer>
     </div>
     <script src="{{ asset('js/tether.min.js') }}"></script>
