@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Post;
+use App\Category;
+use App\Tag;
 
 class PostsController extends Controller
 {
@@ -31,7 +33,12 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        
+        $categories = Category::all();
+
+        
+        $tags = Tag::all();
+        return view('admin.posts.create')->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -45,9 +52,11 @@ class PostsController extends Controller
         $post = new Post;
         $post->title = $request->title;
         $post->content = $request->content;
+        $post->category_id = $request->category_id;
 
-        $post->category_id = 1;
         $post->save();
+
+        $post->tags()->sync($request->input('tags'), false);
 
         return redirect(route('posts.index'))->with('message','An article has been added');
     }
@@ -76,7 +85,12 @@ class PostsController extends Controller
     public function edit($id)
     {
        $post = Post::find($id);
-       $data = ['post' => $post];
+       
+       $categories = Category::pluck('name', 'id');
+
+       $tags = Tag::pluck('name', 'id');
+
+       $data = ['post' => $post, 'categories' => $categories, 'tags' => $tags];
 
        return view('admin.posts.edit',$data);
     }
@@ -93,7 +107,9 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->title = $request->title;
         $post->content = $request->content;
+        $post->category_id = $request->category_id;
         $post->save();
+        $post->tags()->sync($request->input('tags'));
 
         return redirect(route('posts.index'))->with('message','An article has been updated');
     }

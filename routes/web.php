@@ -15,7 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', 'AboutController');
+Route::get('about', 'AboutController');
 Route::get('blog', ['uses' => 'PostsController@index', 'as' => 'blog']);
-
+Route::get('admin', ['uses' => 'Admin\DashboardController@index', 'as' => 'admin']);
 Route::resource('posts', 'Admin\PostsController'); 
+Route::resource('categories', 'Admin\CategoriesController'); 
+Route::resource('tags', 'Admin\TagsController'); 

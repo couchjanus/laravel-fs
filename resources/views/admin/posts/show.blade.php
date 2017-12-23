@@ -1,20 +1,51 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="row">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <b>{{$post->title}}</b>
+    <div class="container">
+
+        @if (Session::get('message') != Null)
+        <div class="row">
+            <div class="col-md-9">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ Session::get('message') }}
                 </div>
-                <div class="card-block">
-                    {!! $post->content !!}
-                </div>
-                <div class="card-footer text-muted">
-                    <div class="pull-right">
-                        <a title="Edit article" href="{{ url('/posts/edit/'.$post->id) }}" class="btn btn-warning"><span class="fa fa-edit"></span></a>
-                        <button title="Delete article" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_article_{{ $post->id  }}"><span class="fa fa-trash-o"></span></button>
+            </div>
+        </div>
+        @endif
+    
+        <div class="row">
+            @include('admin.sidebar')
+
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Edit article</div>
+                    <div class="panel-body">
+                        <a href="{{ route('posts.index') }}" class="btn btn-success btn-sm" title="All Posts">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back
+                        </a>
+                        <br/>
+                        <br/>
+                        <div class="table-responsive">
+                            <div class="card">
+                                <div class="card-header">
+                                    <b>{{$post->title}}</b>
+                                </div>
+                                <div class="card-block">
+                                    {!! $post->content !!}
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <div class="pull-right">
+                                        <a title="Edit article" href="{{ url('/posts/'.$post->id.'/edit/') }}" class="btn btn-warning"><span class="fa fa-edit"></span></a>
+                                        <button title="Delete article" type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_article_{{ $post->id  }}"><span class="fa fa-trash-o"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

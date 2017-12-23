@@ -3,17 +3,34 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
-    // Таблица, связанная с моделью.
-    protected $table = 'posts';
+    use Sluggable;
 
-    // Определяет необходимость отметок времени для модели.
-    public $timestamps = false;
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+   
+   public function category() 
+    {
+        return $this->belongsTo('App\Category');
+    }
 
-    // Формат хранения отметок времени модели.
-    protected $dateFormat = 'U';
-
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
 
 }
