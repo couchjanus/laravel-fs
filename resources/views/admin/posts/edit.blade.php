@@ -89,4 +89,16 @@
     </div>
 
 @endsection
+@section('scripts')
+<script>
 
+        $('').select2({
+            placeholder: 'Choose A Tag',
+            tags: true 
+        });
+
+        
+        $('#tags').select2().val({!! json_encode($post->tags()->allRelatedIds()->toArray()) !!}).trigger('change');
+</script>
+
+@endsection

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Post;
+use App\Category;
+use App\Tag;
+
 
 class PostsController extends Controller
 {
@@ -14,32 +17,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = DB::select('select * from posts');
+        $posts = Post::all();
 
-        return view('posts.index', ['posts' => $posts]);
+        return view('posts.index')
+            ->with('posts', $posts);
+
     }
     
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('posts.create');   
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        
-        DB::insert('insert into posts (title, content, category_id) values (?, ?, ?)', [$request['title'], $request['content'], 1]);
-    }
 
     /**
      * Display the specified resource.
@@ -49,47 +33,43 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
-        $post = DB::select("select * from posts where id = :id", ['id' => $id]);
+                
+        $post = Post::find($id);
+        $data = ['post' => $post];
 
-        return view('posts.show', ['post' => $post]);
+        return view('posts.show',$data);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function listByCategoryId($id)
     {
-        $post = DB::select("select * from posts where id = :id", ['id' => $id]);
 
-        return view('posts.edit', ['post' => $post]);
+    $posts = Post::with('category')->where('category_id',$id)->get();
+
+    return view('posts.single')
+                    ->with('posts', $posts);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function listOrderByCategories()
     {
-        $sql = "UPDATE posts SET title= ? content= ? WHERE id= ?";
-        DB::update($sql, array($request['title'], $request['content'], 'id' => $id));
-     
+
+    $posts = Post::with('category')->orderBy('category_id', 'asc')->get();
+
+    return view('posts.list')
+                    ->with('posts', $posts);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function listByCategories()
     {
-        //
+
+    $categories = Category::with(['posts' => function($query){
+        $query->orderBy('updated_at', 'DESC')->take(4)->get();
+    }])->get();
+
+    return view('posts.categories')
+                    ->with('categories', $categories);
+
     }
+
 }

@@ -8,10 +8,14 @@
 <body>
     <div class="container">
         <header class="row">
-            @include('shared.header')
+            @include('shared.navigation')
+            
         </header>
+
+            @yield('jumbotron')
+
         <div id="main" class="row">
-            @include('_container_content')
+                @yield('content')
         </div>
 
         <footer class="row">

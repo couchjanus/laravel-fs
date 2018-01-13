@@ -128,18 +128,7 @@
         <script src="/js/app.js"></script>
         <script src="/js/select2.min.js"></script>
 
-        <script>
-
-        $('').select2({
-            placeholder: 'Choose A Tag',
-            tags: true 
-        });
-
         
-        $('#tags').select2().val({!! json_encode($post->tags()->allRelatedIds()->toArray()) !!}).trigger('change');
-        </script>
-
-
         <script type="text/javascript">
             $(function () {
                 // Navigation active

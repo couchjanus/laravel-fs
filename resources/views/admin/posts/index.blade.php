@@ -59,6 +59,9 @@
 
                 </div>
             </div>
+            <div class="justify-content-center">
+                {{ $posts->links() }}
+            </div>
         </div>
     </div>
 
@@ -93,5 +96,5 @@
             </form>
         </div>
     @endforeach
-
+    
 @endsection
