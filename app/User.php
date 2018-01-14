@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -26,4 +28,41 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /**
+     * User Profile Relationships.
+     *
+     * @var array
+     */
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+    // User Profile Setup - SHould move these to a trait or interface...
+
+    public function profiles()
+    {
+        return $this->belongsToMany('App\Profile')->withTimestamps();
+    }
+
+    public function hasProfile($name)
+    {
+        foreach ($this->profiles as $profile) {
+            if ($profile->name == $name) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function assignProfile($profile)
+    {
+        return $this->profiles()->attach($profile);
+    }
+
+    public function removeProfile($profile)
+    {
+        return $this->profiles()->detach($profile);
+    }
 }

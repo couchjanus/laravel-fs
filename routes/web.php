@@ -40,3 +40,30 @@ Route::get('/email', function () {
 
 Route::get('contact', 'ContactController@create')->name('contact.create');
 Route::post('contact', 'ContactController@store')->name('contact.store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('profile/{username}', [
+  'as'   => '{username}',
+  'uses' => 'ProfileController@show',
+]);
+
+// User Profile and Account Routes
+Route::resource(
+  'profile',
+  'ProfileController', [
+      'only' => [
+          'show',
+          'edit',
+          'update',
+          'create',
+      ],
+  ]
+);
+
+// OAuth Routes
+
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
