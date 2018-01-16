@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Category;
 use App\Tag;
+use Illuminate\Support\Facades\Gate;
 
 class PostsController extends Controller
 {
@@ -18,11 +19,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        
-        $posts = Post::paginate(3);
+        if (Gate::allows('admin-only', auth()->user())) {
 
-        return view('admin.posts.index')
-            ->with('posts', $posts);
+            $posts = Post::paginate(3);
+
+            return view('admin.posts.index')
+                ->with('posts', $posts);
+        }
 
     }
 

@@ -29,10 +29,12 @@ Route::get('categorylist', [
   'as' => 'category.list', 'uses' => 'PostsController@listByCategories']);
 
 
-Route::get('admin', ['uses' => 'Admin\DashboardController@index', 'as' => 'admin']);
+// Route::get('admin', ['uses' => 'Admin\DashboardController@index', 'as' => 'admin']);
 Route::resource('posts', 'Admin\PostsController'); 
 Route::resource('categories', 'Admin\CategoriesController'); 
 Route::resource('tags', 'Admin\TagsController'); 
+
+Route::get('admin', ['uses' => 'Admin\DashboardController@index', 'as' => 'admin'])->middleware('admin');
 
 Route::get('/email', function () {
     return new App\Mail\ContactEmail();
