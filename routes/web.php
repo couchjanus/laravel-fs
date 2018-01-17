@@ -47,6 +47,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::prefix('admins')->group(function() {
+    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admins.login');
+    Route::post('/login', 'Auth\AdminLoginController@login')->name('admins.login.submit');
+    Route::get('/', 'Cms\AdminsController@index')->name('admins.dashboard');
+});
+
 Route::get('profile/{username}', [
   'as'   => '{username}',
   'uses' => 'ProfileController@show',
