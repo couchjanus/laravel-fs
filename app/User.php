@@ -28,7 +28,28 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationship Methods
+    |--------------------------------------------------------------------------
+    */
+    /**
+     * Many-To-Many Relationship Method for accessing the User->roles
+     *
+     * @return QueryBuilder Object
+     */
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function permissions()
+    {
+        return $this->hasManyThrough('App\Permission', 'App\Role');
+    }
+
     /**
      * User Profile Relationships.
      *
@@ -65,4 +86,33 @@ class User extends Authenticatable
     {
         return $this->profiles()->detach($profile);
     }
+
+
+    /**
+    * Checks a Permission
+    */
+
+    public function isSuperVisor()
+    {
+       if ($this->roles->contains('title', 'Supervisor')) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public function hasRole($role)
+    {
+        if ($this->isSuperVisor()) {
+            return true;
+        }
+
+        if (is_string($role)) {
+            return $this->role->contains('title', $role);
+        }
+
+        return !! $this->roles->intersect($role)->count();
+    }
+
 }
