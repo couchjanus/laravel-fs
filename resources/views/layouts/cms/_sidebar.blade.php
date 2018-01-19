@@ -33,43 +33,60 @@
             <li>
               <a href="{{ url('/admins') }}">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>User Management</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
-            </li>
-            <li>
-              <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span>
-                <span class="pull-right-container">
-                  <small class="label pull-right bg-green">new</small>
-                </span>
-              </a>
+              <ul class="treeview-menu">
+                <li>
+                  <a href="{!! route('users.index') !!}">
+                    <i class="fa fa-user-circle-o"></i> <span>Users</span>
+                    <span class="pull-right-container">
+                      <small class="label pull-right bg-green">new</small>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="{!! route('admins.index') !!}">
+                    <i class="fa fa-user-circle-o"></i> <span>Admins</span>
+                    <span class="pull-right-container">
+                      <small class="label pull-right bg-green">new</small>
+                    </span>
+                  </a>
+                </li>
+              </ul>
             </li>
             
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>Forms</span>
+                <i class="fa fa-key"></i> <span>RBAC</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                <li><a href="{!! route('roles.index') !!}"><i class="fa fa-circle-o"></i> Roles</a></li>
+                <li><a href="{!! route('permissions.index') !!}"><i class="fa fa-circle-o"></i> Permissions</a></li>
               </ul>
             </li>
+            
             <li class="treeview">
               <a href="#">
-                <i class="fa fa-table"></i> <span>Tables</span>
+                <i class="fa fa-table"></i> <span>Blogs</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Tags</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Categories</a></li>
+                <li><a href="#"><i class="fa fa-circle-o"></i> Posts</a></li>
               </ul>
             </li>
             <li>

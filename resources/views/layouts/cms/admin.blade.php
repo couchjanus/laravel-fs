@@ -61,7 +61,7 @@
           @endif
        
           <div class="row">
-            @yield('layouts.cms._container_content')
+            @include('layouts.cms._container_content')
           </div>
           <!-- /.row -->
         </section>
