@@ -56,3 +56,142 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+
+# Carbon – это пакет для работы со временем и датой в PHP. 
+Пакет Carbon позволяет нам существенно упростить и ускорить работу со временем и датами в Laravel. Пакет обладает широкими возможностями получения и манипулирования датами. Данный пакет по умолчанию включен в состав Laravel.
+[Официальный сайт Carbon](http://carbon.nesbot.com/) 
+[Документация по Carbon](http://carbon.nesbot.com/docs/) 
+## Основные функции Carbon:
+- Работа с часовыми поясами
+- Получение текущего времени
+- Прибавление и вычитания даты
+
+Для подключение Carbon необходимо импортировать Carbon из пространства имен Carbon:
+
+```php
+
+<?php
+use Carbon;
+
+```
+
+- Получение текущей даты и времени
+```
+
+$date = Carbon::now();
+
+```
+- Другой способ получения текущей даты:
+```
+$current = new Carbon();
+
+```
+- Получение текущей даты
+```
+
+$date = Carbon::today();
+
+```
+
+- Получение завтрашней даты.
+```
+$date = Carbon::tomorrow();
+
+```
+- Получить последнюю пятницу в этом месяце.
+```
+$date = Carbon::now();
+$lastFriday = new Carbon('last friday of '.$date);
+
+```
+
+- Создание даты из определенного количества аргументов:
+```
+Carbon::createFromDate($year, $month, $day, $tz);
+
+```
+Или время:
+```
+Carbon::createFromTime($hour, $minute, $second, $tz);
+
+```
+Или время и дату:
+
+```
+Carbon::create($year, $month, $day, $hour, $minute, $second, $tz);
+
+```
+если один из этих параметров передать как null, то будет подставлено текущее значение.
+
+- Добавляем 3 дня к текущей дате.
+```
+$current = Carbon::now();
+$date = Carbon::now()->addDays(3);
+
+```
+- Добавляем один день
+```
+$date = Carbon::now()->addDay();
+
+```
+- Вычитаем один день
+
+```
+$date = Carbon::now()->subDay();
+
+```
+
+- Вычитаем три дня
+```
+$date = Carbon::now()->subDays(3);
+
+```
+- Добавляем 5 лет к текущей дате
+```
+$date = Carbon::now()->addYears(5);
+
+```
+- Добавляем один год
+```
+$date = Carbon::now()->addYear();
+
+```
+
+- Вычитаем один год
+```
+$date = Carbon::now()->subYear();
+
+```
+- Вычитаем пять лет
+```
+$date = Carbon::now()->subYears(5);
+```
+- Манипулирование с месяцами
+
+```
+$date = Carbon::now()->addMonths(2);
+$date = Carbon::now()->addMonth();
+$date = Carbon::now()->subMonths(2);
+$date = Carbon::now()->subMonth();
+
+```
+- Манипулирование с неделями
+
+```
+$date = Carbon::now()->addWeeks(3);
+$date = Carbon::now()->addWeek();
+$date = Carbon::now()->subWeeks(3);
+$date = Carbon::now()->subWeek(3);
+
+```
+- Относительное время
+
+```
+$current = Carbon::now();
+$date = Carbon::now();
+$date->addHours(10);
+echo $current->diffInHours($date, false);
+
+```
+

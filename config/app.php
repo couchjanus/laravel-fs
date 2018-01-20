@@ -182,6 +182,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\OnlineServiceProvider::class,
+        App\Providers\StaticPageServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +239,8 @@ return [
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Online' => App\Helpers\Online::class,
 
     ],
 

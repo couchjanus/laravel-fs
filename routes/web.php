@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('about', 'AboutController')->name('about.index');
 Route::get('blog', ['uses' => 'PostsController@index', 'as' => 'blog']);
@@ -46,6 +43,8 @@ Route::post('contact', 'ContactController@store')->name('contact.store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::model('page', 'App\Page');
 
 
 Route::prefix('admins')->group(function() {
@@ -85,6 +84,7 @@ Route::prefix('admins')->group(function() {
     Route::patch('/roles/update/{id}', 'Cms\RolesController@update')->name('roles.update');
     Route::delete('/roles/destroy/{id}', 'Cms\RolesController@destroy')->name('roles.destroy');
 
+    Route::resource('/pages', 'Cms\PagesController');
 
     Route::get('/', 'Cms\AdminsController@index')->name('admins.dashboard');
 });
@@ -111,3 +111,9 @@ Route::resource(
 
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
+
+Route::get('/{slug}', 'FrontPageController@index');
+
+Route::get('/', function () {
+    return view('welcome');
+});

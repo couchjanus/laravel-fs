@@ -43,6 +43,7 @@
                     <table class="table table-hover">
                         <thead>
                           <tr>
+                            <th>Online</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th width="200px" class="text-right">Actions</th>
@@ -52,6 +53,13 @@
 
                         @foreach($users as $user)
                             <tr>
+                                <td>
+                                    @if($user->isOnline())
+                                        <span style="color:green">Online</span>
+                                    @else
+                                        <span style="color:red">Offline</span>
+                                    @endif
+                                </td>
                                 <td><a href="{!! route('users.edit', [$user->id]) !!}">{!! $user->name !!}</a></td>
                                 <td class="raw-m-hide">{!! $user->email !!}</td>
                                 
