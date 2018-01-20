@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use App\Permission;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -57,11 +59,11 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->roles[0]->id, [1]);    
         });
 
-        foreach($this->getPermissions() as $permission) {
-            Gate::define($permission->title, function($user) use ($permission) {
-                return $user->hasRole($permission->roles);
-            });
-        }
+        // foreach($this->getPermissions() as $permission) {
+        //     Gate::define($permission->title, function($user) use ($permission) {
+        //         return $user->hasRole($permission->roles);
+        //     });
+        // }
     }
     private function getPermissions()
     {

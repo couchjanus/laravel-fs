@@ -36,3 +36,13 @@
     {!! Form::close() !!}
 @stop
 
+
+@section('javascript')
+    <script>
+        $('#permission_list').select2({
+            placeholder: 'Choose A Permissions',
+            permissions: true
+        });
+    </script>
+   
+@stop

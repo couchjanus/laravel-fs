@@ -24,3 +24,5 @@
 <!-- ChartJS -->
 
 <script src="{{ asset('cms/js/chart.js/Chart.js') }}"></script>
+
+<script type="text/javascript" src="/js/select2.min.js"></script>

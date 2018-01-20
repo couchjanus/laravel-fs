@@ -105,3 +105,13 @@
     </div>
 
 @endsection
+@section('javascript')
+    <script>
+        $('#role_list').select2({
+            placeholder: 'Choose A Role',
+            roles: true
+        });
+
+    </script>
+   
+@stop

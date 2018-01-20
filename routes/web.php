@@ -70,9 +70,11 @@ Route::prefix('admins')->group(function() {
     Route::get('/permissions', 'Cms\PermissionsController@index')->name('permissions.index');
     Route::get('/permissions/create', 'Cms\PermissionsController@create')->name('permissions.create');
     Route::get('/permissions/{id}/edit', 'Cms\PermissionsController@edit')->name('permissions.edit');
+    Route::get('/permissions/show/{id}', 'Cms\PermissionsController@show')->name('permissions.show');
     
     Route::post('/permissions/store', 'Cms\PermissionsController@store')->name('permissions.store');
     Route::post('/permissions/update/{id}', 'Cms\PermissionsController@update')->name('permissions.update');
+    Route::post('/permissions/destroy/{id}', 'Cms\PermissionsController@destroy')->name('permissions.destroy');
     
     Route::get('/roles', 'Cms\RolesController@index')->name('roles.index');
     Route::get('/roles/create', 'Cms\RolesController@create')->name('roles.create');

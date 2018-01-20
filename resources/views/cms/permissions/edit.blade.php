@@ -40,4 +40,3 @@
     {!! Form::submit('Update', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
 @stop
-
