@@ -1,8 +1,17 @@
-@extends('cms.layouts.dashboard')
+@extends('layouts.cms.admin')
 
 @section('content')
-    <h3 class="page-title">Roles</h3>
-    
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Edit Role</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+
     {!! Form::model($role, ['method' => 'PUT', 'route' => ['roles.update', $role->id]]) !!}
 
     <div class="panel panel-default">
@@ -25,15 +34,22 @@
                 <div class="col-xs-12 form-group">
                     {!! Form::label('permission_list', 'Permissions:') !!}
                     {!! Form::select('permission_list[]', $permissions, $role->permissions, ['id' => 'permission_list', 'class' => 'form-control', 'multiple', 'style' => 'width: 100%']) !!}
-                            
+
                 </div>
             </div>
-            
+
         </div>
     </div>
 
     {!! Form::submit('Update', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
+  </div>
+  <!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+</section>
 @stop
 
 
@@ -44,5 +60,5 @@
             permissions: true
         });
     </script>
-   
+
 @stop
