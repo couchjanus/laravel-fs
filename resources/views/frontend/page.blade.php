@@ -2,7 +2,9 @@
 
 @section('title', '| View Page')
 
+
 @section('content')
+{{ Breadcrumbs::render('home') }}
 
           <div class="blog-post">
 

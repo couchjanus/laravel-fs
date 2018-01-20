@@ -173,6 +173,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
 
+        Arrilot\Widgets\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -239,6 +241,9 @@ return [
         'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Widget'       => Arrilot\Widgets\Facade::class,
+        'AsyncWidget'  => Arrilot\Widgets\AsyncFacade::class,
 
         'Online' => App\Helpers\Online::class,
 

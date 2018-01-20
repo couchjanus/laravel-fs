@@ -6,8 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "arrilot/laravel-widgets": "^3.9",
         "creativeorange/gravatar": "^1.0",
         "cviebrock/eloquent-sluggable": "^4.3",
+        "davejamesmiller/laravel-breadcrumbs": "^4.2",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~3.3",
         "fzaninotto/faker": "^1.7",
