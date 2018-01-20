@@ -1,10 +1,16 @@
-@extends('cms.layouts.dashboard')
+@extends('layouts.cms.admin')
 
 @section('content')
-
-    <div class="row">
-        <h1 class="page-header">User</h1>
-    </div>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">EDit User</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
 
         <div class="row">
          {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch', 'class' => 'edit']) !!}
@@ -17,7 +23,7 @@
                 <div class="panel-body">
                     <div class="col-md-8 form-group">
                     <div class="row">
-                    
+
                         <div class="col-md-8 form-group">
                             {!! Form::label('name', 'Name*', ['class' => 'control-label']) !!}
                             {!! Form::text('name', null, ['class' => 'form-control']) !!}
@@ -28,7 +34,7 @@
                                 </p>
                             @endif
                         </div>
-                    
+
                     </div>
 
                     <div class="row">
@@ -55,7 +61,7 @@
                         <div class="col-xs-8 form-group">
                             {!! Form::label('role_list', 'Roles:') !!}
                             {!! Form::select('role_list[]', $roles, $user->roles, ['id' => 'role_list', 'class' => 'form-control', 'multiple', 'style' => 'width: 100%']) !!}
-                            
+
                         </div>
                     </div>
                     <div class="form-group text-right">
@@ -101,9 +107,15 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
-
+  </div>
+  <!-- /.box-body -->
+  </div>
+  <!-- /.box -->
+  </div>
+  </div>
+  </section>
 @endsection
 @section('javascript')
     <script>
@@ -113,5 +125,5 @@
         });
 
     </script>
-   
+
 @stop
