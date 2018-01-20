@@ -58,14 +58,14 @@ Route::prefix('admins')->group(function() {
     Route::get('/users/show/{id}', 'Cms\UsersController@show')->name('users.show');
 
     Route::post('/users/store', 'Cms\UsersController@store')->name('users.store');
-    Route::post('/users/update/{id}', 'Cms\UsersController@update')->name('users.update');
-
+    Route::patch('/users/update/{id}', 'Cms\UsersController@update')->name('users.update');
+    Route::delete('/users/destroy/{id}', 'Cms\UsersController@destroy')->name('users.destroy');
     Route::get('/admins', 'Cms\AdminsController@list')->name('admins.index');
     Route::get('/admins/create', 'Cms\AdminsController@create')->name('admins.create');
     Route::get('/admins/{id}/edit', 'Cms\AdminsController@edit')->name('admins.edit');
 
     Route::post('/admins/store', 'Cms\AdminsController@store')->name('admins.store');
-    Route::post('/admins/update/{id}', 'Cms\AdminsController@update')->name('admins.update');
+    Route::patch('/admins/update/{id}', 'Cms\AdminsController@update')->name('admins.update');
     
     Route::get('/permissions', 'Cms\PermissionsController@index')->name('permissions.index');
     Route::get('/permissions/create', 'Cms\PermissionsController@create')->name('permissions.create');
@@ -73,15 +73,18 @@ Route::prefix('admins')->group(function() {
     Route::get('/permissions/show/{id}', 'Cms\PermissionsController@show')->name('permissions.show');
     
     Route::post('/permissions/store', 'Cms\PermissionsController@store')->name('permissions.store');
-    Route::post('/permissions/update/{id}', 'Cms\PermissionsController@update')->name('permissions.update');
-    Route::post('/permissions/destroy/{id}', 'Cms\PermissionsController@destroy')->name('permissions.destroy');
+    Route::patch('/permissions/update/{id}', 'Cms\PermissionsController@update')->name('permissions.update');
+    Route::delete('/permissions/destroy/{id}', 'Cms\PermissionsController@destroy')->name('permissions.destroy');
     
     Route::get('/roles', 'Cms\RolesController@index')->name('roles.index');
     Route::get('/roles/create', 'Cms\RolesController@create')->name('roles.create');
     Route::get('/roles/{id}/edit', 'Cms\RolesController@edit')->name('roles.edit');
+    Route::get('/roles/show/{id}', 'Cms\RolesController@show')->name('roles.show');
 
     Route::post('/roles/store', 'Cms\RolesController@store')->name('roles.store');
-    Route::post('/roles/update/{id}', 'Cms\RolesController@update')->name('roles.update');
+    Route::patch('/roles/update/{id}', 'Cms\RolesController@update')->name('roles.update');
+    Route::delete('/roles/destroy/{id}', 'Cms\RolesController@destroy')->name('roles.destroy');
+
 
     Route::get('/', 'Cms\AdminsController@index')->name('admins.dashboard');
 });

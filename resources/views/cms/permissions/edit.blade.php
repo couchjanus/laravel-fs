@@ -1,15 +1,21 @@
-@extends('cms.layouts.dashboard')
-
+@extends('layouts.cms.admin')
 @section('content')
-    <h3 class="page-title">Permissions</h3>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Edit Permission</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+
     
-    {!! Form::model($permission, ['method' => 'PUT', 'route' => ['permissions.update', $permission->id]]) !!}
+    {!! Form::model($permission, ['method' => 'PATCH', 'route' => ['permissions.update', $permission->id]]) !!}
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-            Edit
-        </div>
-
+      
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 form-group">
@@ -39,4 +45,11 @@
 
     {!! Form::submit('Update', ['class' => 'btn btn-danger']) !!}
     {!! Form::close() !!}
+    </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+</section>
 @stop

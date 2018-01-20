@@ -1,12 +1,16 @@
-@extends('cms.layouts.dashboard')
-
+@extends('layouts.cms.admin')
 @section('content')
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Edit User</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
 
-    <div class="row">
-        <h1 class="page-header">User</h1>
-    </div>
-
-        <div class="row">
          {!! Form::model($user, ['route' => ['users.update', $user->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
             <div class="panel panel-default">
@@ -59,7 +63,7 @@
                         </div>
                     </div>
                     <div class="form-group text-right">
-                        <a href="{!! url('/users') !!}" class="btn btn-default raw-left">Cancel</a>
+                        <a href="{!! route('users.index') !!}" class="btn btn-default raw-left">Cancel</a>
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                     </div>
 
@@ -102,7 +106,14 @@
                 </div>
             </div>
         </div>        
+       </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
     </div>
+  </div>
+</section>
+
 
 @endsection
 @section('javascript')

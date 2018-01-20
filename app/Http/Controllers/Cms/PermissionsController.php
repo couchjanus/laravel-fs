@@ -83,8 +83,10 @@ class PermissionsController extends Controller
      */
 
     public function update(UpdatePermissionsRequest $request, $id)
+    
     {
         $permission = Permission::findOrFail($id);
+        // dd($permission);
         $permission->update($request->all());
 
         return redirect()->route('permissions.index');

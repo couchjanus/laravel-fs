@@ -84,10 +84,14 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsersRequest $request, $id)
+    // public function update(UpdateUsersRequest $request, $id)
+     public function update(Request $request, $id)
+
     {
         $user = User::findOrFail($id);
+
         $user->update($request->all());
+
         $user->roles()->sync($request->input('role_list'));
 
         return redirect()->route('users.index');
