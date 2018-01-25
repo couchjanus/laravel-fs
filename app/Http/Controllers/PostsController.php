@@ -72,4 +72,34 @@ class PostsController extends Controller
 
     }
 
+
+    public function addComment($id, Request $request)
+    {
+        // Get the currently authenticated user's ID... Auth::user()->id
+        //error_log(print_r($_REQUEST, true));
+
+        $user = User::find($request->input('user_id'));
+
+        $post = Post::findOrFail($id);
+
+        $comment = $post->comment([
+            'title' => 'Some title',
+            'body' => $request->body,
+        ], $user);
+
+        //$parent = $post->comments->first();
+        //$comment = $post->comment($request->all(), $user, $parent);
+        //$comment = $post->comment($request->all(), $user);
+        //return Post::findOrFail($id)->comment($request->all(), $user);
+        return $comment;
+    }
+
+    public function editComment($id, $comment_id, Request $request)
+    {
+        
+        // error_log(print_r($_REQUEST, true));
+        return Post::findOrFail($id)->updateComment($comment_id, $request->except('user_id'));
+    }
+
+
 }

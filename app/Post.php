@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Helpers\Traits\HasComments;
 
 class Post extends Model
 {
     use Sluggable;
+    use HasComments;
 
     /**
      * Return the sluggable configuration array for this model.
