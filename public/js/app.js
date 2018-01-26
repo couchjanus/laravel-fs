@@ -44695,6 +44695,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44785,68 +44790,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     }
   }
-
-  /* created: function(){
-      this.fetchComments();
-  },
-  
-    ready: function(){
-      this.fetchComments();
-    },
-   methods: {
-      fetchComments: function(){
-  
-        this.$http.get("../api/post/"+window.Laravel.post_id+"/comments")
-          .then(function (response){
-            this.comments = response.data;
-        });
-      },
-      
-      createComment: function(){
-        this.$http.post("../api/post/"+window.Laravel.post_id+"/comment", this.comment)
-          .then( (response) => {
-            this.comment.body= '';
-            this.fetchComments();
-        }, (error) => {
-          console.log(error); // this.handleError(error);
-        });
-      },
-  
-  
-      editComment: function(comment_id){
-        this.$http.patch("../api/post/"+window.Laravel.post_id+"/comment/"+comment_id, this.comment)
-          .then( function (response){
-            this.comment.body= '';
-            this.comment.id= '';
-            this.fetchComments();
-            this.edit = false;
-        });
-      },
-  
-      deleteComment: function(comment_id){
-        this.$http.delete("../api/post/"+window.Laravel.post_id+"/comment/"+comment_id)
-          .then( function (response){
-            this.comment.body= '';
-            this.fetchComments();
-        });
-      },
-  
-      showComment: function(comment_id){
-        console.log("clicked"+comment_id);
-        console.log(this.comments);
-        
-        for (var i = 0; i < this.comments.length; i++) {
-          if (this.comments[i].id == comment_id) {
-            this.comment.body = this.comments[i].body;
-            this.comment.id = this.comments[i].id;
-            this.edit = true;
-          }
-        }
-      }
-    }
-  }
-  */
-
 });
 
 /***/ }),
@@ -44858,147 +44801,151 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.currentUser !== undefined
-      ? _c("span", [
-          _c("h4", [_vm._v("Add Comment")]),
-          _vm._v(" "),
-          _c(
-            "form",
-            {
-              attrs: { action: "" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  _vm.edit
-                    ? _vm.editComment(_vm.comment.id)
-                    : _vm.createComment()
-                }
-              }
-            },
-            [
-              _c("div", { staticClass: "input-group" }, [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.comment.body,
-                      expression: "comment.body"
-                    }
-                  ],
-                  ref: "textarea",
-                  staticClass: "form-control",
-                  attrs: { name: "body" },
-                  domProps: { value: _vm.comment.body },
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-sm-8" }, [
+        _vm.currentUser !== undefined
+          ? _c("span", [
+              _c("h4", [_vm._v("Add Comment")]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  attrs: { action: "" },
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.comment, "body", $event.target.value)
+                    submit: function($event) {
+                      $event.preventDefault()
+                      _vm.edit
+                        ? _vm.editComment(_vm.comment.id)
+                        : _vm.createComment()
                     }
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group" }, [
-                _c(
-                  "button",
-                  {
-                    directives: [
+                },
+                [
+                  _c("div", { staticClass: "input-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.comment.body,
+                          expression: "comment.body"
+                        }
+                      ],
+                      ref: "textarea",
+                      staticClass: "form-control",
+                      attrs: { name: "body" },
+                      domProps: { value: _vm.comment.body },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.comment, "body", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _c(
+                      "button",
                       {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.edit,
-                        expression: "!edit"
-                      }
-                    ],
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Add Comment")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    directives: [
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.edit,
+                            expression: "!edit"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Add Comment")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
                       {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.edit,
-                        expression: "edit"
-                      }
-                    ],
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Edit Comment")]
-                )
-              ])
-            ]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("h4", [_vm._v("Comments")]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "list-group" },
-      _vm._l(_vm.comments, function(comment) {
-        return _c("li", { staticClass: "list-group-item" }, [
-          _vm._v(
-            "\n        " +
-              _vm._s(comment.body) +
-              "\n        " +
-              _vm._s(comment.creator_id) +
-              "\n        "
-          ),
-          _vm.currentUser !== undefined &&
-          _vm.currentUser === comment.creator_id
-            ? _c("span", [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-default",
-                    on: {
-                      click: function($event) {
-                        _vm.showComment(comment.id)
-                      }
-                    }
-                  },
-                  [_vm._v("Edit")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-danger",
-                    on: {
-                      click: function($event) {
-                        _vm.deleteComment(comment.id)
-                      }
-                    }
-                  },
-                  [_vm._v("Delete")]
-                )
-              ])
-            : _vm._e()
-        ])
-      })
-    ),
-    _vm._v(" "),
-    _vm.errors && _vm.errors.length
-      ? _c(
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.edit,
+                            expression: "edit"
+                          }
+                        ],
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Edit Comment")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("h4", [_vm._v("Comments")]),
+        _vm._v(" "),
+        _c(
           "ul",
-          _vm._l(_vm.errors, function(error) {
-            return _c("li", [
-              _vm._v("\n        " + _vm._s(error.message) + "\n      ")
+          { staticClass: "list-group" },
+          _vm._l(_vm.comments, function(comment) {
+            return _c("li", { staticClass: "list-group-item" }, [
+              _vm._v(
+                "\n        " +
+                  _vm._s(comment.body) +
+                  "\n        " +
+                  _vm._s(comment.creator_id) +
+                  "\n        "
+              ),
+              _vm.currentUser !== undefined &&
+              _vm.currentUser === comment.creator_id
+                ? _c("span", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-default",
+                        on: {
+                          click: function($event) {
+                            _vm.showComment(comment.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Edit")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-danger",
+                        on: {
+                          click: function($event) {
+                            _vm.deleteComment(comment.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  ])
+                : _vm._e()
             ])
           })
-        )
-      : _vm._e()
+        ),
+        _vm._v(" "),
+        _vm.errors && _vm.errors.length
+          ? _c(
+              "ul",
+              _vm._l(_vm.errors, function(error) {
+                return _c("li", [
+                  _vm._v("\n        " + _vm._s(error.message) + "\n      ")
+                ])
+              })
+            )
+          : _vm._e()
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

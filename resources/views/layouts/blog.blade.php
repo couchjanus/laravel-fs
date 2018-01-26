@@ -7,6 +7,7 @@
 </head>
 <body>
     <header class="row">
+      <div class="col-sm-12">
         @include('shared.navigation')
         <div class="blog-header">
         <div class="container">
@@ -14,21 +15,17 @@
           <p class="lead blog-description">An example blog.</p>
         </div>
       </div>
+    </div>
+
     </header>
 
     <main role="main" class="container">
-
       <div class="row">
-
-        <div class="col-sm-8 blog-main">
+        <div class="col-sm-12 blog-main">
             <!-- main content -->
             @yield('content')
         </div><!-- /.blog-main -->
-
             <!-- sidebar content -->
-        
-            @include('shared.sidebar')
-        
       </div><!-- /.row -->
     </main>
 
