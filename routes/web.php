@@ -37,6 +37,16 @@ Route::get('/email', function () {
     return new App\Mail\ContactEmail();
 });
 
+Route::get('/vue/items', function () {
+    $results =  \App\Post::all();
+    return $results;
+});
+
+Route::get('/items', function () {
+    return view('items');
+});
+
+
 Route::get('contact', 'ContactController@create')->name('contact.create');
 Route::post('contact', 'ContactController@store')->name('contact.store');
 

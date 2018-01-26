@@ -11,7 +11,7 @@ require('./bootstrap');
 
 // Vue.use(VueResource);
 
-Vue.http.options.emulateJSON = true;
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
