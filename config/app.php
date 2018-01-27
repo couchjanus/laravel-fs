@@ -174,6 +174,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
 
         Arrilot\Widgets\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -246,6 +247,7 @@ return [
         'AsyncWidget'  => Arrilot\Widgets\AsyncFacade::class,
 
         'Online' => App\Helpers\Online::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

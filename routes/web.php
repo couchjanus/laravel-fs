@@ -94,6 +94,15 @@ Route::prefix('admins')->group(function() {
     Route::patch('/roles/update/{id}', 'Cms\RolesController@update')->name('roles.update');
     Route::delete('/roles/destroy/{id}', 'Cms\RolesController@destroy')->name('roles.destroy');
 
+    Route::get('/posts', 'Cms\PostsController@index')->name('articles.index');
+    Route::get('/posts/create', 'Cms\PostsController@create')->name('articles.create');
+    Route::get('/posts/{id}/edit', 'Cms\PostsController@edit')->name('articles.edit');
+    Route::get('/posts/show/{id}', 'Cms\PostsController@show')->name('articles.show');
+
+    Route::post('/posts/store', 'Cms\PostsController@store')->name('articles.store');
+    Route::patch('/posts/update/{id}', 'Cms\PostsController@update')->name('articles.update');
+    Route::delete('/posts/destroy/{id}', 'Cms\PostsController@destroy')->name('articles.destroy');
+
     Route::resource('/pages', 'Cms\PagesController');
 
     Route::get('/', 'Cms\AdminsController@index')->name('admins.dashboard');

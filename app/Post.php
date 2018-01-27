@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Helpers\Traits\HasComments;
 
@@ -10,6 +11,7 @@ class Post extends Model
 {
     use Sluggable;
     use HasComments;
+    use Searchable;
 
     /**
      * Return the sluggable configuration array for this model.

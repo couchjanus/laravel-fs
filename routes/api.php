@@ -37,4 +37,10 @@ Route::group(['middleware' => 'api'], function(){
        return 'deleted';
     });
 
+    Route::get('search', [
+      'as' => 'api.search',
+      'uses' => 'Api\SearchController@search'
+    ]);
+    
 });
+

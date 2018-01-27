@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 39);
+/******/ 	return __webpack_require__(__webpack_require__.s = 47);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -44568,54 +44568,44 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 39 */
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(40);
-module.exports = __webpack_require__(44);
+module.exports = __webpack_require__(48);
 
 
 /***/ }),
-/* 40 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
-
-
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
 
 __webpack_require__(10);
 
-// var VueResource = require('vue-resource');
-
-// Vue.use(VueResource);
-
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the body of the page. From here, you may begin adding components to
- * the application, or feel free to tweak this setup for your needs.
- */
-
-window.Vue.component('comments', __webpack_require__(41));
+window.Vue.component('search', __webpack_require__(49));
 
 var app = new Vue({
-  el: '#app'
+
+    el: '#app'
 
 });
 
 /***/ }),
-/* 41 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(38)
 /* script */
-var __vue_script__ = __webpack_require__(42)
+var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(43)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -44632,7 +44622,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/comments.vue"
+Component.options.__file = "resources/assets/js/components/Search.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -44641,9 +44631,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1030e90b", Component.options)
+    hotAPI.createRecord("data-v-7cdae69f", Component.options)
   } else {
-    hotAPI.reload("data-v-1030e90b", Component.options)
+    hotAPI.reload("data-v-7cdae69f", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -44654,7 +44644,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 42 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -44700,100 +44690,67 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+		data: function data() {
+				return {
+						posts: [],
+						loading: false,
+						error: false,
+						query: ''
+				};
+		},
 
-  props: ['currentId', 'currentUser'],
+		filters: {
+				truncate: function truncate(value) {
+						var length = 20;
+						if (value.length <= length) {
+								return value;
+						} else {
+								return value.substring(0, length) + '...';
+						}
+				}
+		},
 
-  data: function data() {
-    return {
-      edit: false,
-      comments: [],
-      comment: {
-        title: '',
-        body: '',
-        id: ''
+		mounted: function mounted() {
+				this.search();
+		},
 
-      },
-      errors: []
-    };
-  },
+		methods: {
+				search: function search() {
+						var _this = this;
 
-  created: function created() {
-    this.fetchComments();
-  },
-  ready: function ready() {
-    this.fetchComments();
-  },
+						// Clear the error message.
+						this.error = '';
+						// Empty the posts array so we can fill it with the new posts.
+						this.posts = [];
+						// Set the loading property to true, this will display the "Searching..." button.
+						this.loading = true;
 
-  // mounted: function(){
-  //  this.fetchComments();
-  // },
+						// Making a get request to our API and passing the query to it.
 
+						// this.query = 'cumque';
+						this.$http.get('/api/search?q=' + this.query).then(function (response) {
+								// If there was an error set the error message, if not fill the posts array.
+								//response.error ? this.error = response.error : this.posts = response;
+								_this.posts = response.body;
+								// The request is finished, change the loading to false again.
+								_this.loading = false;
+								// Clear the query.
+								_this.query = '';
+						});
+				}
+		}
 
-  methods: {
-    fetchComments: function fetchComments() {
-      var _this = this;
-
-      this.$http.get("../api/post/" + this.currentId + "/comments").then(function (response) {
-        _this.comments = response.data;
-        // this.user_id = this.currentUser;
-      }).catch(function (error) {
-        _this.errors.push(error);
-      });
-    },
-
-    createComment: function createComment() {
-      var _this2 = this;
-
-      this.$http.post("../api/post/" + this.currentId + "/comment", this.comment).then(function (response) {
-        _this2.comment.body = '';
-        _this2.fetchComments();
-      }).catch(function (error) {
-        _this2.comment.body = '';
-        _this2.fetchComments();
-      });
-    },
-
-    editComment: function editComment(comment_id) {
-      var _this3 = this;
-
-      this.$http.patch("../api/post/" + this.currentId + "/comment/" + comment_id, this.comment).then(function (response) {
-        _this3.comment.body = '';
-        _this3.comment.id = '';
-        _this3.fetchComments();
-        _this3.edit = false;
-      }).catch(function (error) {
-        // this.errors.push(error)
-        _this3.comment.body = '';
-        _this3.comment.id = '';
-        _this3.fetchComments();
-        _this3.edit = false;
-      });
-    },
-
-    deleteComment: function deleteComment(comment_id) {
-      axios.delete("../api/post/" + this.currentId + "/comment/" + comment_id).then(function (response) {
-        this.comment.body = '';
-        this.fetchComments();
-      }.bind(this));
-    },
-
-    showComment: function showComment(comment_id) {
-      for (var i = 0; i < this.comments.length; i++) {
-        if (this.comments[i].id == comment_id) {
-          this.comment.body = this.comments[i].body;
-          this.comment.id = this.comments[i].id;
-          this.edit = true;
-        }
-      }
-    }
-  }
 });
 
 /***/ }),
-/* 43 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -44801,170 +44758,143 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-8" }, [
-        _vm.currentUser !== undefined
-          ? _c("span", [
-              _c("h4", [_vm._v("Add Comment")]),
-              _vm._v(" "),
-              _c(
-                "form",
+    _c("div", { staticClass: "well well-sm" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "input-group input-group-md" }, [
+          _c("div", { staticClass: "icon-addon addon-md" }, [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { action: "" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      _vm.edit
-                        ? _vm.editComment(_vm.comment.id)
-                        : _vm.createComment()
-                    }
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.query,
+                  expression: "query"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                placeholder: "What are you looking for?",
+                name: "query"
+              },
+              domProps: { value: _vm.query },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                },
-                [
-                  _c("div", { staticClass: "input-group" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.comment.body,
-                          expression: "comment.body"
-                        }
-                      ],
-                      ref: "textarea",
-                      staticClass: "form-control",
-                      attrs: { name: "body" },
-                      domProps: { value: _vm.comment.body },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.comment, "body", $event.target.value)
-                        }
+                  _vm.query = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "input-group-btn" }, [
+            !_vm.loading
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.search()
                       }
-                    })
+                    }
+                  },
+                  [_vm._v("Search!")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.loading
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-default",
+                    attrs: { type: "button", disabled: "disabled" }
+                  },
+                  [_vm._v("Searching...")]
+                )
+              : _vm._e()
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.error
+      ? _c(
+          "div",
+          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
+          [
+            _c("span", {
+              staticClass: "glyphicon glyphicon-exclamation-sign",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v("\n        " + _vm._s(_vm.error) + "\n    ")
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.posts[0]
+      ? _c(
+          "div",
+          { staticClass: "row list-group", attrs: { id: "posts" } },
+          _vm._l(_vm.posts, function(post) {
+            return _c("div", { staticClass: "item col-xs-4 col-lg-4" }, [
+              _c("div", { staticClass: "thumbnail" }, [
+                _c("img", {
+                  staticClass: "group list-group-image",
+                  attrs: { src: post.post_thumbnail, alt: post.title }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "caption" }, [
+                  _c(
+                    "h4",
+                    { staticClass: "group inner list-group-item-heading" },
+                    [_vm._v(_vm._s(post.title))]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "group inner list-group-item-text" }, [
+                    _vm._v(_vm._s(_vm._f("truncate")(post.content)))
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "input-group" }, [
-                    _c(
-                      "button",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !_vm.edit,
-                            expression: "!edit"
-                          }
-                        ],
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Add Comment")]
-                    ),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-xs-12 col-md-6" }, [
+                      _c("p", { staticClass: "lead" }, [
+                        _vm._v(_vm._s(post.updated_at))
+                      ])
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.edit,
-                            expression: "edit"
-                          }
-                        ],
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [_vm._v("Edit Comment")]
-                    )
+                    _vm._m(0, true)
                   ])
-                ]
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("h4", [_vm._v("Comments")]),
-        _vm._v(" "),
-        _c(
-          "ul",
-          { staticClass: "list-group" },
-          _vm._l(_vm.comments, function(comment) {
-            return _c("li", { staticClass: "list-group-item" }, [
-              _vm._v(
-                "\n            " +
-                  _vm._s(comment.body) +
-                  "\n            " +
-                  _vm._s(comment.creator_id) +
-                  "\n            "
-              ),
-              _vm.currentUser !== undefined &&
-              _vm.currentUser === comment.creator_id
-                ? _c("span", [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-default",
-                        on: {
-                          click: function($event) {
-                            _vm.showComment(comment.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Edit")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-danger",
-                        on: {
-                          click: function($event) {
-                            _vm.deleteComment(comment.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Delete")]
-                    )
-                  ])
-                : _vm._e()
+                ])
+              ])
             ])
           })
-        ),
-        _vm._v(" "),
-        _vm.errors && _vm.errors.length
-          ? _c(
-              "ul",
-              _vm._l(_vm.errors, function(error) {
-                return _c("li", [
-                  _vm._v(
-                    "\n            " + _vm._s(error.message) + "\n          "
-                  )
-                ])
-              })
-            )
-          : _vm._e()
-      ])
-    ])
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-xs-12 col-md-6" }, [
+      _c("a", { staticClass: "btn btn-success", attrs: { href: "#" } }, [
+        _vm._v("Read more")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-1030e90b", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-7cdae69f", module.exports)
   }
 }
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
